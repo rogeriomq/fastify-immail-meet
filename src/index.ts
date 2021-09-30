@@ -1,1 +1,3 @@
-console.log('SERVER STARTING...')
+import { bootstrap } from '@/app'
+
+bootstrap()

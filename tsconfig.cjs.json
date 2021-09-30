@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "module": "ES2020",
+    "module": "CommonJS",
     "sourceMap": true,
     "lib": [
       "ESNext"
     ],
-    "outDir": "./dist",
+    "outDir": "./dist.cjs",
     "rootDir": "./src",
     "allowJs": true,
     "removeComments": true,
@@ -30,11 +30,6 @@
       // "@models/*": ["./src/models/*"],
       // "@views/*": ["./src/views/*"],
       // "@config/*": ["./src/config/*"]
-    }
-  },
-  "ts-node": {
-    "compilerOptions": {
-      "module": "commonjs"
     }
   },
   "include": [
