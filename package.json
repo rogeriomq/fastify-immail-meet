@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "fastify": "^3.22.0",
-    "fastify-cors": "^6.0.2"
+    "fastify-cors": "^6.0.2",
+    "pino-pretty": "^7.0.1"
   }
 }
