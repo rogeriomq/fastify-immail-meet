@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "module": "ES2020",
+    "lib": ["es6"],
+    "allowJs": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "removeComments": true,
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/@types"
+    ],
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "Node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    // "paths": {
+    //   "@controllers/*": ["./src/controllers/*"],
+    //   "@models/*": ["./src/models/*"],
+    //   "@views/*": ["./src/views/*"],
+    //   "@config/*": ["./src/config/*"]
+    // }
+  },
+  "include": [
+    "src/**/*"
+  ]
+}
