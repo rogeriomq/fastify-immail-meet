@@ -21,15 +21,21 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "Node",
+    "declaration": true,
     "baseUrl": ".",
     "paths": {
       "@/*": [
         "./src/*"
+      ],
+      "@modules/*": [
+        "./src/modules/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
+      ],
+      "@config/*": [
+        "./src/config/*"
       ]
-      // "@controllers/*": ["./src/controllers/*"],
-      // "@models/*": ["./src/models/*"],
-      // "@views/*": ["./src/views/*"],
-      // "@config/*": ["./src/config/*"]
     }
   },
   "include": [
