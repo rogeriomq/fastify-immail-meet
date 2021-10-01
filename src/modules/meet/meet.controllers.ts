@@ -1,25 +1,23 @@
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { StatusCodes } from 'http-status-codes'
-import { getToken, getTokenByUser } from './auth.services'
+import * as meetServices from './meet.services'
+import { getToken } from '@/modules/auth/auth.services'
 import { to } from '@/utils'
 
-export type BodyUserLogin = {
-  username: string
-  password: string
-}
-
-export const authByUserLogin = async (
-  request: FastifyRequest<{ Body: BodyUserLogin }>,
+export const createMeet = async (
+  request: FastifyRequest,
   reply: FastifyReply
 ): Promise<void> => {
-  const { username, password } = request.body
-  const [error, token] = await to(getTokenByUser({ username, password }))
-  if (error) reply.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Deu ruim')
+  const [errorGetToken, authToken] = await to(getToken())
+  if (errorGetToken) reply.status(StatusCodes.BAD_REQUEST).send(errorGetToken)
+
+  const [error, token] = await to(meetServices.createMeetRoom(authToken))
+  if (error) reply.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error)
 
   reply.status(StatusCodes.OK).send(token)
 }
 
-export const authByToken = async (
+export const getParticipantToken = async (
   request: FastifyRequest,
   reply: FastifyReply
 ): Promise<void> => {

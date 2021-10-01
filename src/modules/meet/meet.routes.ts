@@ -1,5 +1,5 @@
 import { FastifyInstance, FastifyServerOptions } from 'fastify'
-import { authByToken, authByUserLogin } from './auth.controllers'
+import { createMeet, getParticipantToken } from './meet.controllers'
 
 export default function (
   fastify: FastifyInstance,
@@ -7,21 +7,21 @@ export default function (
   done?: any
 ): void {
   fastify.route({
-    method: 'POST',
-    url: '/auth/user-login',
+    method: 'GET',
+    url: '/meet/room/create',
     schema: {
       body: {
         username: { type: 'string' },
         password: { type: 'string' },
       },
     },
-    handler: authByUserLogin,
+    handler: createMeet,
   })
 
   fastify.route({
     method: 'GET',
-    url: '/auth/api-login',
-    handler: authByToken,
+    url: '/meet/token/participant',
+    handler: getParticipantToken,
   })
 
   done()
