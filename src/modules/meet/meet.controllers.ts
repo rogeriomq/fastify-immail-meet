@@ -28,7 +28,6 @@ export const getParticipantToken = async (
   }>,
   reply: FastifyReply
 ): Promise<void> => {
-  console.log(request.query)
   const { roomName, moderator = false } = request.query
   const [errorGetToken, authToken] = await to(getToken())
   if (errorGetToken) reply.status(StatusCodes.BAD_REQUEST).send(errorGetToken)
