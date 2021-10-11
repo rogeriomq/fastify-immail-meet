@@ -2,8 +2,13 @@
   "name": "fastify-immail-meet",
   "version": "1.0.0",
   "main": "src/index.js",
-  "license": "MIT",
   "type": "module",
+  "engines": {
+    "node": "14.17.x",
+    "npm": "7.x.x",
+    "yarn": "1.22.x"
+  },
+  "license": "(MIT OR Apache-2.0)",
   "scripts": {
     "start": "node dist/index.js",
     "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify --clear src/index.ts"

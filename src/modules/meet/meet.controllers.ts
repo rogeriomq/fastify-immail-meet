@@ -17,13 +17,27 @@ export const createMeet = async (
   reply.status(StatusCodes.OK).send(token)
 }
 
+export interface IQuerystringGetParticipantToken {
+  roomName: string
+  moderator: boolean
+}
+
 export const getParticipantToken = async (
-  request: FastifyRequest,
+  request: FastifyRequest<{
+    Querystring: IQuerystringGetParticipantToken
+  }>,
   reply: FastifyReply
 ): Promise<void> => {
   console.log(request.query)
-  const [error, token] = await to(getToken())
-  if (error) reply.status(StatusCodes.INTERNAL_SERVER_ERROR).send('Deu ruim')
+  const { roomName, moderator = false } = request.query
+  const [errorGetToken, authToken] = await to(getToken())
+  if (errorGetToken) reply.status(StatusCodes.BAD_REQUEST).send(errorGetToken)
 
-  reply.status(StatusCodes.OK).send(token)
+  const [errorRoomToken, authRoomToken] = await to(
+    meetServices.getMeetRoomToken(authToken, roomName, moderator)
+  )
+  if (errorRoomToken)
+    reply.status(StatusCodes.INTERNAL_SERVER_ERROR).send(errorRoomToken)
+
+  reply.status(StatusCodes.OK).send(authRoomToken)
 }

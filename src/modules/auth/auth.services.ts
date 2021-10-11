@@ -6,6 +6,7 @@ export type GetTokenByUserParams = {
   username: string
   password: string
 }
+
 export const getTokenByUser = async ({
   username,
   password,
@@ -23,7 +24,7 @@ export const getTokenByUser = async ({
   return { token }
 }
 
-export const getToken = async (): Promise<{ token: string }> => {
+export const getToken = async (): Promise<string> => {
   const options: AxiosRequestConfig = {
     method: 'POST',
     url: `${API_URL}/auth/token`,
@@ -36,5 +37,6 @@ export const getToken = async (): Promise<{ token: string }> => {
 
   const response = await axios(options)
   const { token } = response.data
-  return { token }
+
+  return token
 }

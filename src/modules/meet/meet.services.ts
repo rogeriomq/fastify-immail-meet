@@ -3,6 +3,7 @@ import axios, { AxiosRequestConfig } from 'axios'
 const { API_URL } = process.env
 
 export const createMeetRoom = async (authToken: string): Promise<any> => {
+  console.log('AuthToken:', authToken)
   const options: AxiosRequestConfig = {
     method: 'POST',
     url: `${API_URL}/v2/videoconference/schedule`,

@@ -1,5 +1,9 @@
 import { FastifyInstance, FastifyServerOptions } from 'fastify'
-import { createMeet, getParticipantToken } from './meet.controllers'
+import {
+  createMeet,
+  getParticipantToken,
+  IQuerystringGetParticipantToken,
+} from './meet.controllers'
 
 export default function (
   fastify: FastifyInstance,
@@ -9,16 +13,12 @@ export default function (
   fastify.route({
     method: 'GET',
     url: '/meet/room/create',
-    schema: {
-      body: {
-        username: { type: 'string' },
-        password: { type: 'string' },
-      },
-    },
     handler: createMeet,
   })
 
-  fastify.route({
+  fastify.route<{
+    Querystring: IQuerystringGetParticipantToken
+  }>({
     method: 'GET',
     url: '/meet/token/participant',
     handler: getParticipantToken,
