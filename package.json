@@ -4,9 +4,8 @@
   "main": "src/index.js",
   "type": "module",
   "engines": {
-    "node": "14.17.x",
-    "npm": "7.x.x",
-    "yarn": "1.22.x"
+    "node": "^14.17.x",
+    "yarn": "^1.22.x"
   },
   "license": "(MIT OR Apache-2.0)",
   "scripts": {
