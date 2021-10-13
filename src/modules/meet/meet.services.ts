@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios'
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 
 const { API_URL } = process.env
 
@@ -10,7 +10,14 @@ export const createMeetRoom = async (authToken: string): Promise<any> => {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${authToken}`,
     },
-    data: {},
+    /**
+     * Details of body in:
+     * https://docs.immail.ca/#req_8625e52fab6244bc907c11c85568b6b6
+     */
+    data: {
+      topic: 'Consultation',
+      duration: 60,
+    },
   }
   const response = await axios(options)
   return response.data
@@ -21,6 +28,7 @@ export const getMeetRoomToken = async (
   roomName: string,
   moderator = false
 ): Promise<{ token: string }> => {
+  console.log('##### MODERATOR', moderator)
   const options: AxiosRequestConfig = {
     method: 'POST',
     url: `${API_URL}/v2/videoconference/token`,
@@ -31,7 +39,8 @@ export const getMeetRoomToken = async (
     data: { room_name: roomName, moderator },
   }
 
-  const response = await axios(options)
+  const response: AxiosResponse<{ token: string }, unknown> =
+    await axios.request(options)
   const { token } = response.data
   return { token }
 }

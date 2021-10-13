@@ -20,6 +20,13 @@ export default function (
     Querystring: IQuerystringGetParticipantToken
   }>({
     method: 'GET',
+    schema: {
+      // Parse querystring to object
+      querystring: {
+        roomName: { type: 'string' },
+        moderator: { type: 'boolean' },
+      },
+    },
     url: '/meet/token/participant',
     handler: getParticipantToken,
   })

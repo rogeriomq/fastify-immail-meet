@@ -19,7 +19,7 @@ export const createMeet = async (
 
 export interface IQuerystringGetParticipantToken {
   roomName: string
-  moderator: boolean
+  moderator?: boolean
 }
 
 export const getParticipantToken = async (
