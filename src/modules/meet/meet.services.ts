@@ -28,7 +28,6 @@ export const getMeetRoomToken = async (
   roomName: string,
   moderator = false
 ): Promise<{ token: string }> => {
-  console.log('##### MODERATOR', moderator)
   const options: AxiosRequestConfig = {
     method: 'POST',
     url: `${API_URL}/v2/videoconference/token`,
