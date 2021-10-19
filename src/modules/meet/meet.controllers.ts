@@ -9,10 +9,11 @@ export const createMeet = async (
   reply: FastifyReply
 ): Promise<void> => {
   const [errorGetToken, authToken] = await to(getToken())
-  if (errorGetToken) reply.status(StatusCodes.BAD_REQUEST).send(errorGetToken)
+  if (errorGetToken)
+    return reply.status(StatusCodes.BAD_REQUEST).send(errorGetToken)
 
   const [error, token] = await to(meetServices.createMeetRoom(authToken))
-  if (error) reply.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error)
+  if (error) return reply.status(StatusCodes.BAD_REQUEST).send(error)
 
   reply.status(StatusCodes.OK).send(token)
 }
