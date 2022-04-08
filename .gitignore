@@ -105,3 +105,4 @@ dist.cjs
 .tern-port
 
 TODO.md
+.vscode/settings.json
