@@ -3,7 +3,7 @@ import {
   FastifyError,
   FastifyInstance,
   FastifyPluginOptions,
-  RouteOptions,
+  RouteOptions
 } from 'fastify'
 import fastifyPlugin from 'fastify-plugin'
 
@@ -18,14 +18,14 @@ const methodsOrder = [
   'DELETE',
   'HEAD',
   'PATCH',
-  'OPTIONS',
+  'OPTIONS'
 ]
 
-function getRouteConfig(r: RouteOptions): RouteConfig {
+function getRouteConfig (r: RouteOptions): RouteConfig {
   return (r.config as RouteConfig) ?? {}
 }
 
-function printRoutes(routes: Array<RouteOptions>): void {
+function printRoutes (routes: Array<RouteOptions>): void {
   if (routes.length === 0) {
     return
   }
@@ -62,7 +62,7 @@ function printRoutes(routes: Array<RouteOptions>): void {
         .join(' | '),
       // eslint-disable-next-line no-useless-escape
 
-      `${route.url.replace(/(?:[\w]+|\[:\w+\])/g, '$&')}`,
+      `${route.url.replace(/(?:[\w]+|\[:\w+\])/g, '$&')}`
     ]
 
     if (hasDescription) {
@@ -75,18 +75,18 @@ function printRoutes(routes: Array<RouteOptions>): void {
   const output = table(rows, {
     columns: {
       0: {
-        alignment: 'right',
+        alignment: 'right'
       },
       1: {
-        alignment: 'left',
+        alignment: 'left'
       },
       2: {
-        alignment: 'left',
-      },
+        alignment: 'left'
+      }
     },
-    drawHorizontalLine(index: number, size: number): boolean {
+    drawHorizontalLine (index: number, size: number): boolean {
       return index < 2 || index > size - 1
-    },
+    }
   })
 
   console.log(`Available routes:\n\n${output}`)

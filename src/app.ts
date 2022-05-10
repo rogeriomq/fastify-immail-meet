@@ -1,18 +1,18 @@
 import Fastify, { FastifyInstance } from 'fastify'
-import fastifyCors from 'fastify-cors'
+import fastifyCors from '@fastify/cors'
 import printRoutes from '@/plugins/fastify/print-routes'
 import { to } from '@/utils'
-import * as modules from '@/modules'
+import * as routes from '@/routes'
 
 const fastify: FastifyInstance = Fastify({
   logger: {
     prettyPrint: {
       levelFirst: false,
       translateTime: 'yyyy-MM-dd HH:mm:ss.l',
-      ignore: 'pid,hostname',
-    },
+      ignore: 'pid,hostname'
+    }
   },
-  ignoreTrailingSlash: true,
+  ignoreTrailingSlash: true
 })
 
 // global plugins
@@ -22,9 +22,9 @@ fastify.register(printRoutes)
 //  define prefix on all routes
 fastify.register(
   (fastify, _, done) => {
-    // register modules/routes
-    Object.keys(modules).forEach(mod => {
-      fastify.register(modules[mod].routes)
+    // register routes
+    Object.keys(routes).forEach(route => {
+      fastify.register(routes[route])
     })
     done()
   },

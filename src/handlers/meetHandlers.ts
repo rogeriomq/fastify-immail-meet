@@ -1,18 +1,17 @@
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { StatusCodes } from 'http-status-codes'
-import * as meetServices from './meet.services'
-import { getToken } from '@/modules/auth/auth.services'
 import { to } from '@/utils'
+import { getToken } from '@/services/getToken'
+import { createMeetRoom, getMeetRoomToken } from '@/services/createMeetRomToken'
 
-export const createMeet = async (
+export const createMeetHandler = async (
   request: FastifyRequest,
   reply: FastifyReply
 ): Promise<void> => {
   const [errorGetToken, authToken] = await to(getToken())
-  if (errorGetToken)
-    return reply.status(StatusCodes.BAD_REQUEST).send(errorGetToken)
+  if (errorGetToken) { return reply.status(StatusCodes.BAD_REQUEST).send(errorGetToken) }
 
-  const [error, token] = await to(meetServices.createMeetRoom(authToken))
+  const [error, token] = await to(createMeetRoom(authToken))
   if (error) return reply.status(StatusCodes.BAD_REQUEST).send(error)
 
   reply.status(StatusCodes.OK).send(token)
@@ -23,7 +22,7 @@ export interface IQuerystringGetParticipantToken {
   moderator?: boolean
 }
 
-export const getParticipantToken = async (
+export const getParticipantTokenHandler = async (
   request: FastifyRequest<{
     Querystring: IQuerystringGetParticipantToken
   }>,
@@ -34,10 +33,9 @@ export const getParticipantToken = async (
   if (errorGetToken) reply.status(StatusCodes.BAD_REQUEST).send(errorGetToken)
 
   const [errorRoomToken, authRoomToken] = await to(
-    meetServices.getMeetRoomToken(authToken, roomName, moderator)
+    getMeetRoomToken(authToken, roomName, moderator)
   )
-  if (errorRoomToken)
-    reply.status(StatusCodes.INTERNAL_SERVER_ERROR).send(errorRoomToken)
+  if (errorRoomToken) { reply.status(StatusCodes.INTERNAL_SERVER_ERROR).send(errorRoomToken) }
 
   reply.status(StatusCodes.OK).send(authRoomToken)
 }

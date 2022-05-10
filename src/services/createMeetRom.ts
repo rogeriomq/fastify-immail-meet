@@ -8,7 +8,7 @@ export const createMeetRoom = async (authToken: string): Promise<any> => {
     url: `${API_URL}/v2/videoconference/schedule`,
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${authToken}`,
+      Authorization: `Bearer ${authToken}`
     },
     /**
      * Details of body in:
@@ -16,8 +16,8 @@ export const createMeetRoom = async (authToken: string): Promise<any> => {
      */
     data: {
       topic: 'Consultation',
-      duration: 60,
-    },
+      duration: 60
+    }
   }
   const response = await axios(options)
   return response.data
@@ -33,9 +33,9 @@ export const getMeetRoomToken = async (
     url: `${API_URL}/v2/videoconference/token`,
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${authToken}`,
+      Authorization: `Bearer ${authToken}`
     },
-    data: { room_name: roomName, moderator },
+    data: { room_name: roomName, moderator }
   }
 
   const response: AxiosResponse<{ token: string }, unknown> =

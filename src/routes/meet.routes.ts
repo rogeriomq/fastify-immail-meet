@@ -1,11 +1,11 @@
 import { FastifyInstance, FastifyServerOptions } from 'fastify'
 import {
-  createMeet,
-  getParticipantToken,
-  IQuerystringGetParticipantToken,
-} from './meet.controllers'
+  createMeetHandler,
+  getParticipantTokenHandler,
+  IQuerystringGetParticipantToken
+} from '@/handlers/meetHandlers'
 
-export default function (
+export function meetRoutes (
   fastify: FastifyInstance,
   options?: FastifyServerOptions,
   done?: any
@@ -13,7 +13,7 @@ export default function (
   fastify.route({
     method: 'GET',
     url: '/meet/room/create',
-    handler: createMeet,
+    handler: createMeetHandler
   })
 
   fastify.route<{
@@ -24,11 +24,11 @@ export default function (
       // Parse querystring to object
       querystring: {
         roomName: { type: 'string' },
-        moderator: { type: 'boolean' },
-      },
+        moderator: { type: 'boolean' }
+      }
     },
     url: '/meet/token/participant',
-    handler: getParticipantToken,
+    handler: getParticipantTokenHandler
   })
 
   done()
