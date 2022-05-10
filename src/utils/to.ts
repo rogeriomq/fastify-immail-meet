@@ -3,5 +3,6 @@ type IResolveReturn = [
   null | Promise<any> | Promise<boolean> | string
 ]
 
-export default (promise: Promise<any>): Promise<IResolveReturn | any> =>
-  promise.then(result => [null, result]).catch(error => [error])
+export function to (promise: Promise<any>): Promise<IResolveReturn | any> {
+  return promise.then(result => [null, result]).catch(error => [error])
+}

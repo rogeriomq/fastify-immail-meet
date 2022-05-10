@@ -1,8 +1,8 @@
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { StatusCodes } from 'http-status-codes'
-import { to } from '@/utils'
 import { getToken } from '@/services/getToken'
 import { createMeetRoom, getMeetRoomToken } from '@/services/createMeetRomToken'
+import { to } from '@/utils/to'
 
 export const createMeetHandler = async (
   request: FastifyRequest,

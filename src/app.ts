@@ -1,7 +1,7 @@
 import Fastify, { FastifyInstance } from 'fastify'
 import fastifyCors from '@fastify/cors'
 import printRoutes from '@/plugins/fastify/print-routes'
-import { to } from '@/utils'
+import { to } from '@/utils/to'
 import * as routes from '@/routes'
 
 const fastify: FastifyInstance = Fastify({
